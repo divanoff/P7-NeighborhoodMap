@@ -25,3 +25,7 @@ code {
   height: 100%;
   background-color: #eee;
 }
+
+.header {
+  display: inline;
+}
