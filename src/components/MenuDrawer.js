@@ -25,8 +25,14 @@ const styles = {
       });
     };
 
+    //TODO: wire up the click on an item in the sidebar
     handleClick(event) {
-        console.log(event.target);
+        console.log(event.target.value);
+    }
+
+    //TODO: wire up the filter by name
+    handleFilter(event) {
+        console.log(event.target.value);
     }
   
     render() {
@@ -34,7 +40,7 @@ const styles = {
   
       const sideList = (
         <div className={classes.list}>
-          <Input type="text" placeholder="Filter by name" className="sidebar-input" />
+          <Input type="text" placeholder="Filter by name" className="sidebar-input" onChange={this.handleFilter} />
           <List>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
               <ListItem button key={text}>

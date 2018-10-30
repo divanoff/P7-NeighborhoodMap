@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
 import MenuDrawer from './MenuDrawer';
 import MapDisplay from './MapDisplay';
 import Header from './Header';
+import './App.css';
 
 class App extends Component {
   render() {

@@ -27,5 +27,13 @@ code {
 }
 
 .header {
-  display: inline;
+  text-align: center;
+}
+
+.header button {
+  float: left;
+  margin-left: 10px;
+}
+
+.header h1 {
 }
