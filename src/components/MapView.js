@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class MapDisplay extends Component {
+class MapView extends Component {
     render() {
         return (
             <div className="map-display">
@@ -10,4 +10,4 @@ class MapDisplay extends Component {
     }
 }
 
-export default MapDisplay;
+export default MapView;
