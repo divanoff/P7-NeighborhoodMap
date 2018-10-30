@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
+import Input from '@material-ui/core/Input';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 
@@ -24,22 +24,19 @@ const styles = {
         left: open,
       });
     };
+
+    handleClick(event) {
+        console.log(event.target);
+    }
   
     render() {
       const { classes } = this.props;
   
       const sideList = (
         <div className={classes.list}>
+          <Input type="text" placeholder="Filter by name" className="sidebar-input" />
           <List>
             {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemText primary={text} />
               </ListItem>
@@ -55,8 +52,8 @@ const styles = {
             <div
               tabIndex={0}
               role="button"
-              onClick={this.toggleDrawer(false)}
-              onKeyDown={this.toggleDrawer(false)}
+            //   onClick={console.log(this)}
+            //   onKeyDown={this.toggleDrawer(false)}
             >
               {sideList}
             </div>
