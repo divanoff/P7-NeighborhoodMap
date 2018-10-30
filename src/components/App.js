@@ -15,7 +15,8 @@ class App extends Component {
     state: '',
     country: '',
     ipAddress: '',
-    postal: ''
+    postal: '',
+    isDrawerOpen: false
   }
 
   componentDidMount() {
@@ -32,14 +33,22 @@ class App extends Component {
     });
   }
 
+  toggleDrawer = () => {
+    this.setState({isDrawerOpen: !this.state.isDrawerOpen});
+  }
+
   render() {
     return (
       <div className="App">
         <Header
           city={this.state.city}
           state={this.state.state}
+          onToggleDrawer={this.toggleDrawer}
         />
-        <MenuDrawer />
+        <MenuDrawer
+          isDrawerOpen={this.state.isDrawerOpen}
+          onToggleDrawer={this.toggleDrawer}
+        />
         <MapView />
       </div>
     );

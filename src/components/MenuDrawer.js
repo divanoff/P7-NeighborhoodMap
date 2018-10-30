@@ -16,13 +16,14 @@ const styles = {
   
   class MenuDrawer extends React.Component {
     state = {
-      left: false
+      left: this.props.isDrawerOpen
     };
   
     toggleDrawer = (open) => () => {
-      this.setState({
-        left: open,
-      });
+      // this.setState({
+      //   left: open,
+      // });
+      this.props.onToggleDrawer();
     };
 
     //TODO: wire up the click on an item in the sidebar
@@ -53,13 +54,13 @@ const styles = {
   
       return (
         <div>
-          <Button onClick={this.toggleDrawer(true)}><i className="material-icons">menu</i></Button>
-          <Drawer open={this.state.left} onClose={this.toggleDrawer(false)}>
+          {/* <Button onClick={this.toggleDrawer()}><i className="material-icons">menu</i></Button> */}
+          <Drawer open={this.props.isDrawerOpen} onClose={this.props.onToggleDrawer}>
             <div
               tabIndex={0}
               role="button"
-            //   onClick={console.log(this)}
-            //   onKeyDown={this.toggleDrawer(false)}
+              // onClick={this.toggleDrawer()}
+              // onKeyDown={this.toggleDrawer()}
             >
               {sideList}
             </div>
