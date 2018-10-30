@@ -1,11 +1,17 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
-export default function() {
+export default function(props) {
     return (
         <div className="header" >
             <Button><i className="material-icons">menu</i></Button>
-            <h1>Craft beers near you</h1>
+            <h1>Craft beers near {
+                props.city && (
+                    `${props.city}, ${props.state}`
+                )
+                ||
+                ' you'
+            } </h1>
         </div>
     );
 }
