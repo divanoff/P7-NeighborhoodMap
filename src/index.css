@@ -31,6 +31,11 @@ code {
   padding: 8px;
 }
 
+.header button {
+  max-height: 48px;
+  margin: auto 0;
+}
+
 .title {
   margin: 0 auto;
   display: flex;
