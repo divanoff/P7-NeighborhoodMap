@@ -3,6 +3,7 @@ import MenuDrawer from './MenuDrawer';
 import Header from './Header';
 import MapView from './MapView';
 import { getIPLocation } from './ipinfoAPI';
+import { getPlaces } from './yelpApi';
 import './App.css';
 
 class App extends Component {
@@ -16,7 +17,8 @@ class App extends Component {
     country: '',
     ipAddress: '',
     postal: '',
-    isDrawerOpen: false
+    isDrawerOpen: false,
+    places: []
   }
 
   componentDidMount() {
@@ -30,7 +32,10 @@ class App extends Component {
         postal: data.postal,
         ipAddress: data.ip
       });
-    });
+    }).catch(e => console.log(e));
+    getPlaces(this.state.lat, this.state.long)
+      .then(data => console.log(data))
+      .catch(e => console.log(e));
   }
 
   toggleDrawer = () => {

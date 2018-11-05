@@ -1,16 +1,11 @@
 const api = 'https://ipinfo.io/geo?token=a647767a235d3d';
 const headers = {
-    'Accept': 'application/json'
+    'Accept': 'application/json',
+    'Access-Control-Allow-Origin': '*'
   }
 
 export const getIPLocation = () =>
     fetch(api, {headers})
-        .then(res => {
-            // console.log(res.body)
-            return res.json()
-        })
-        .then(data => {
-            // console.log(data)
-            return data
-        })
+        .then(res => res.json())
+        .then(data => data)
         .catch(e => console.log(e))
