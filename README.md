@@ -1,11 +1,16 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A live working version of this app is hosted on Netlify and can be found [here](https://p7-neighborhood-app.netlify.com/). This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-A live working version is hosted on Netlify and can be found [here](https://p7-neighborhood-app.netlify.com/).
+API's used:
+- Google Maps API
+- Yelp Fusion API V3
+- IPInfo.io API
 
 The app uses the [ipinfo.io](https://ipinfo.io/developers) API to locate the user based on their IP address. The default zoom level when first loaded is 11 because at 13 for most rural areas no markers are shown. If the tester happens to be located in an area where no local results are found, please disable the IP geolocation service by changing the token in the ```api``` variable in ```ipinfoAPI.js```. That way the default area will be used and enough markers will be shown in order to test the functionality.
 
 For a list of places where one can find craft beer, the app uses the [Yelp Fusion API V3](https://www.yelp.com/developers/documentation/v3).
 In order for this app to work with the Yelp Fusion API V3, it needs a Node.js proxy as the Yelp API does not support CORS requests. The NodeJS app was written by [Rob Wu](https://robwu.nl/) and can be found on [GitHub](https://github.com/Rob--W/cors-anywhere). For the pruposes of this demo it is hosted on Heroku.
+
+Special thanks to coach Doug Brown for the excellent walk-through and the tip on using google-maps-react as a wrapper around the Google Maps API.
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md).

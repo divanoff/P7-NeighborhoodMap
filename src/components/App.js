@@ -20,7 +20,9 @@ class App extends Component {
     isDrawerOpen: false,
     places: [],
     filteredPlaces: [],
-    query: ''
+    query: '',
+    isInfoWindowOpen: false,
+    activeMarker: {}
   }
 
   componentDidMount() {
@@ -54,6 +56,12 @@ class App extends Component {
 
   clickPlace = (place) => {
     console.log(place);
+    this.setState({activeMarker: place})
+    this.toggleInfoWindow();
+  }
+
+  toggleInfoWindow = () => {
+    this.setState({isInfoWindowOpen: !this.state.isInfoWindowOpen});
   }
 
   render() {
@@ -77,7 +85,10 @@ class App extends Component {
           lat={this.state.lat}
           lng={this.state.lng}
           places={this.state.filteredPlaces}
+          activeMarker={this.state.activeMarker}
+          isInfoWindowOpen={this.state.isInfoWindowOpen}
           onClickPlace={this.clickPlace}
+          onToggleInfoWindow={this.toggleInfoWindow}
         />
       </div>
     );
