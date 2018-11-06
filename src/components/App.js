@@ -12,11 +12,11 @@ class App extends Component {
     lat: 41.6781432,
     lng: -70.310088,
     zoom: 11,
-    city: 'Hyannis',
-    state: 'MA',
-    country: 'USA',
+    city: '',
+    state: '',
+    country: '',
     ipAddress: '',
-    postal: '02601',
+    postal: '',
     isDrawerOpen: false,
     places: [],
     filteredPlaces: [],
@@ -34,10 +34,10 @@ class App extends Component {
         postal: data.postal,
         ipAddress: data.ip
       });
+      getPlaces(data.loc.split(',')[0], data.loc.split(',')[1])
+        .then(data => {this.setState({places: data.businesses, filteredPlaces: data.businesses})})
+        .catch(e => console.log(e));
     }).catch(e => console.log(e));
-    this.state.lat && this.state.lng && getPlaces(this.state.lat, this.state.lng)
-      .then(data => {this.setState({places: data.businesses, filteredPlaces: data.businesses})})
-      .catch(e => console.log(e));
   }
 
   toggleDrawer = () => {
