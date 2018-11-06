@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+A live working version is hosted on Netlify and can be found [here](https://p7-neighborhood-app.netlify.com/).
+
+***In order for this app to work with the Yelp Fusion API V3, it needs a Node.js proxy as the Yelp API does not support CORS requests. The NodeJS app was written by [Rob Wu](https://robwu.nl/) and can be found on [GitHub](https://github.com/Rob--W/cors-anywhere). For the pruposes of this demo it is hosted on Heroku.***
+
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
@@ -140,12 +144,19 @@ my-app/
     index.html
     favicon.ico
   src/
-    App.css
-    App.js
-    App.test.js
+    components/
+      App.css
+      App.js
+      App.test.js
+      Header.js
+      ipinfoAPI.js
+      MapView.js
+      MenuDrawer.js
+      yelpAPI.js
     index.css
     index.js
     logo.svg
+    serviceWorker.js
 ```
 
 For the project to build, **these files must exist with exact filenames**:
