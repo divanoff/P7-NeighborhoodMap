@@ -10,7 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = {
     list: {
-      width: 350,
+      width: 250,
     }
   };
   

@@ -10,7 +10,7 @@ class App extends Component {
 
   state = {
     lat: 41.6781432,
-    long: -70.310088,
+    lng: -70.310088,
     zoom: 10,
     city: 'Hyannis',
     state: 'MA',
@@ -27,7 +27,7 @@ class App extends Component {
     getIPLocation().then(data => {
       this.setState({
         lat: parseFloat(data.loc.split(',')[0]),
-        long: parseFloat(data.loc.split(',')[1]),
+        lng: parseFloat(data.loc.split(',')[1]),
         city: data.city,
         state: data.region,
         country: data.country,
@@ -35,7 +35,7 @@ class App extends Component {
         ipAddress: data.ip
       });
     }).catch(e => console.log(e));
-    this.state.lat && this.state.long && getPlaces(this.state.lat, this.state.long)
+    this.state.lat && this.state.lng && getPlaces(this.state.lat, this.state.lng)
       .then(data => {this.setState({places: data.businesses, filteredPlaces: data.businesses})})
       .catch(e => console.log(e));
   }
@@ -72,7 +72,13 @@ class App extends Component {
           onClickPlace={this.clickPlace}
           query={this.state.query}
         />
-        <MapView />
+        <MapView
+          zoom={this.state.zoom}
+          lat={this.state.lat}
+          lng={this.state.lng}
+          places={this.state.filteredPlaces}
+          onClickPlace={this.clickPlace}
+        />
       </div>
     );
   }
