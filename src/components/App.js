@@ -11,7 +11,7 @@ class App extends Component {
   state = {
     lat: 41.6781432,
     lng: -70.310088,
-    zoom: 10,
+    zoom: 11,
     city: 'Hyannis',
     state: 'MA',
     country: 'USA',
