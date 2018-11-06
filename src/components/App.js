@@ -12,13 +12,15 @@ class App extends Component {
     lat: 41.6781432,
     long: -70.310088,
     zoom: 10,
-    city: '',
-    state: '',
-    country: '',
+    city: 'Hyannis',
+    state: 'MA',
+    country: 'USA',
     ipAddress: '',
-    postal: '',
+    postal: '02601',
     isDrawerOpen: false,
-    places: []
+    places: [],
+    filteredPlaces: [],
+    query: ''
   }
 
   componentDidMount() {
@@ -33,15 +35,25 @@ class App extends Component {
         ipAddress: data.ip
       });
     }).catch(e => console.log(e));
-    getPlaces(this.state.lat, this.state.long)
-      .then(data => {
-        this.setState({places: data.businesses})
-      })
+    this.state.lat && this.state.long && getPlaces(this.state.lat, this.state.long)
+      .then(data => {this.setState({places: data.businesses, filteredPlaces: data.businesses})})
       .catch(e => console.log(e));
   }
 
   toggleDrawer = () => {
     this.setState({isDrawerOpen: !this.state.isDrawerOpen});
+  }
+
+  filterPlaces = (query) => {
+    this.setState({
+      filteredPlaces: this.state.places.filter(place => 
+        place.name.toLowerCase().includes(query.toLowerCase())),
+      query
+    })
+  }
+
+  clickPlace = (place) => {
+    console.log(place);
   }
 
   render() {
@@ -55,7 +67,10 @@ class App extends Component {
         <MenuDrawer
           isDrawerOpen={this.state.isDrawerOpen}
           onToggleDrawer={this.toggleDrawer}
-          places={this.state.places}
+          places={this.state.filteredPlaces}
+          onFilterPlaces={this.filterPlaces}
+          onClickPlace={this.clickPlace}
+          query={this.state.query}
         />
         <MapView />
       </div>

@@ -10,71 +10,55 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = {
     list: {
-      width: 250,
+      width: 350,
     }
   };
   
-  class MenuDrawer extends React.Component {
-    state = {
-      left: this.props.isDrawerOpen
-    };
-  
-    toggleDrawer = (open) => () => {
-      // this.setState({
-      //   left: open,
-      // });
-      this.props.onToggleDrawer();
-    };
+class MenuDrawer extends React.Component {
+  render() {
+    const { classes } = this.props;
 
-    //TODO: wire up the click on an item in the sidebar
-    handleClick(event) {
-        console.log(event.target.value);
-    }
+    const sideList = (
+      <div className={classes.list}>
+        <Input 
+          type="text" 
+          placeholder="Filter by name" 
+          className="sidebar-input" 
+          value={this.props.query} 
+          onChange={e => this.props.onFilterPlaces(e.target.value)} />
+        <List>
+          {this.props.places.map((place, index) => (
+            <ListItem button key={index} onClick={e => this.props.onClickPlace(place)} >
+              <ListItemText primary={place.name} />
+            </ListItem>
+          ))}
+        </List>
+      </div>
+    );
 
-    //TODO: wire up the filter by name
-    handleFilter(event) {
-        console.log(event.target.value);
-    }
-  
-    render() {
-      const { classes } = this.props;
-  
-      const sideList = (
-        <div className={classes.list}>
-          <Input type="text" placeholder="Filter by name" className="sidebar-input" onChange={this.handleFilter} />
-          <List>
-            {this.props.places && this.props.places.map((place, index) => (
-              <ListItem button key={place.index}>
-                <ListItemText primary={place.name} />
-              </ListItem>
-            ))}
-          </List>
-        </div>
-      );
-  
-      return (
-        <div>
-          {/* <Button onClick={this.toggleDrawer()}><i className="material-icons">menu</i></Button> */}
-          <Drawer open={this.props.isDrawerOpen} onClose={this.props.onToggleDrawer}>
-            <div
-              tabIndex={0}
-              role="button"
-              // onClick={this.toggleDrawer()}
-              // onKeyDown={this.toggleDrawer()}
-            >
-              {sideList}
-            </div>
-          </Drawer>
-        </div>
-      );
-    }
+    return (
+      <div>
+        {/* <Button onClick={this.toggleDrawer()}><i className="material-icons">menu</i></Button> */}
+        <Drawer open={this.props.isDrawerOpen} onClose={this.props.onToggleDrawer}>
+          <div
+            tabIndex={0}
+            role="button"
+            // onClick={this.toggleDrawer()}
+            // onKeyDown={this.toggleDrawer()}
+          >
+            {sideList}
+          </div>
+        </Drawer>
+      </div>
+    );
   }
+}
   
-  MenuDrawer.propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
-  
-  export default withStyles(styles)(MenuDrawer);
+MenuDrawer.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(MenuDrawer);
   
 
 // class MenuDrawer extends React.Component {
