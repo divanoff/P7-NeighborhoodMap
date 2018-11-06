@@ -11,7 +11,7 @@ class App extends Component {
   state = {
     lat: 41.6781432,
     long: -70.310088,
-    zoom: 13,
+    zoom: 10,
     city: '',
     state: '',
     country: '',
@@ -34,7 +34,9 @@ class App extends Component {
       });
     }).catch(e => console.log(e));
     getPlaces(this.state.lat, this.state.long)
-      .then(data => console.log(data))
+      .then(data => {
+        this.setState({places: data.businesses})
+      })
       .catch(e => console.log(e));
   }
 
@@ -53,6 +55,7 @@ class App extends Component {
         <MenuDrawer
           isDrawerOpen={this.state.isDrawerOpen}
           onToggleDrawer={this.toggleDrawer}
+          places={this.state.places}
         />
         <MapView />
       </div>

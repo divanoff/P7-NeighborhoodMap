@@ -43,9 +43,9 @@ const styles = {
         <div className={classes.list}>
           <Input type="text" placeholder="Filter by name" className="sidebar-input" onChange={this.handleFilter} />
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemText primary={text} />
+            {this.props.places && this.props.places.map((place, index) => (
+              <ListItem button key={place.index}>
+                <ListItemText primary={place.name} />
               </ListItem>
             ))}
           </List>
