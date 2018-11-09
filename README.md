@@ -10,6 +10,8 @@ The app uses the [ipinfo.io](https://ipinfo.io/developers) API to locate the use
 For a list of places where one can find craft beer, the app uses the [Yelp Fusion API V3](https://www.yelp.com/developers/documentation/v3).
 In order for this app to work with the Yelp Fusion API V3, it needs a Node.js proxy as the Yelp API does not support CORS requests. The NodeJS app was written by [Rob Wu](https://robwu.nl/) and can be found on [GitHub](https://github.com/Rob--W/cors-anywhere). For the pruposes of this demo it is hosted on Heroku.
 
+The app also uses material-ui MenuDrawer for the slideout sidebar.
+
 Special thanks to coach Doug Brown for the excellent walk-through and the tip on using google-maps-react as a wrapper around the Google Maps API.
 
 Below you will find some information on how to perform common tasks.<br>

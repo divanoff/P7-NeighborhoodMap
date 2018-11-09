@@ -28,7 +28,6 @@ class MapView extends Component {
             this.props.onUpdateMarkers(markers);
             markers.forEach(marker => {
                 this.props.google.maps.event.addListener(marker, 'click', () => {
-                    // marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
                     this.props.onClickMarker(marker);
                 });
                 bounds.extend(marker.position);

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import MenuDrawer from './MenuDrawer';
 import Header from './Header';
 import MapView from './MapView';
-import { getIPLocation } from './ipinfoAPI';
-import { getPlaces } from './yelpApi';
+import { getIPLocation } from '../utils/ipinfoAPI';
+import { getPlaces } from '../utils/yelpApi';
 import './App.css';
 
 class App extends Component {
@@ -69,18 +69,13 @@ class App extends Component {
     this.state.activeMarker.animation && this.state.activeMarker.setAnimation(null);
     this.setState({
       activeMarker: marker,
-      isDrawerOpen: false
+      isDrawerOpen: false,
+      isInfoWindowOpen: true
     })
-
-    this.openInfoWindow();
   }
 
   toggleInfoWindow = () => {
     this.setState({isInfoWindowOpen: !this.state.isInfoWindowOpen});
-  }
-
-  openInfoWindow = () => {
-    this.setState({isInfoWindowOpen: true});
   }
 
   closeInfoWindow = () => {
