@@ -27,16 +27,18 @@ class App extends Component {
 
   componentDidMount() {
     getIPLocation().then(data => {
+      let lat = parseFloat(data.loc.split(',')[0]);
+      let lng = parseFloat(data.loc.split(',')[1]);
       this.setState({
-        lat: parseFloat(data.loc.split(',')[0]),
-        lng: parseFloat(data.loc.split(',')[1]),
+        lat,
+        lng,
         city: data.city,
         state: data.region,
         country: data.country,
         postal: data.postal,
         ipAddress: data.ip
       });
-      getPlaces(data.loc.split(',')[0], data.loc.split(',')[1])
+      getPlaces(lat, lng)
         .then(data => {this.setState({places: data.businesses, filteredPlaces: data.businesses})})
         .catch(e => console.log(e));
     }).catch(e => console.log(e));
@@ -54,14 +56,31 @@ class App extends Component {
     })
   }
 
-  clickPlace = (place) => {
-    console.log(place);
-    this.setState({activeMarker: place})
-    this.toggleInfoWindow();
+  updateMarkers = (markers) => {
+    this.setState({markers});
+  }
+
+  removeMarkers = () => {
+    this.state.markers && this.state.markers.forEach(marker => marker.setMap(null))
+  }
+
+  clickMarker = (marker) => {
+    console.log(marker);
+    this.setState({activeMarker: marker})
+    this.openInfoWindow();
+    this.setState({isDrawerOpen: false})
   }
 
   toggleInfoWindow = () => {
     this.setState({isInfoWindowOpen: !this.state.isInfoWindowOpen});
+  }
+
+  openInfoWindow = () => {
+    this.setState({isInfoWindowOpen: true});
+  }
+
+  closeInfoWindow = () => {
+    this.setState({isInfoWindowOpen: false});
   }
 
   render() {
@@ -77,18 +96,30 @@ class App extends Component {
           onToggleDrawer={this.toggleDrawer}
           places={this.state.filteredPlaces}
           onFilterPlaces={this.filterPlaces}
-          onClickPlace={this.clickPlace}
+          onClickMarker={this.clickMarker}
           query={this.state.query}
+          markers={this.state.markers}
         />
         <MapView
           zoom={this.state.zoom}
           lat={this.state.lat}
           lng={this.state.lng}
           places={this.state.filteredPlaces}
+          markers={this.state.markers}
           activeMarker={this.state.activeMarker}
           isInfoWindowOpen={this.state.isInfoWindowOpen}
-          onClickPlace={this.clickPlace}
+          onClickMarker={this.clickMarker}
           onToggleInfoWindow={this.toggleInfoWindow}
+          onCloseInfoWindow={this.closeInfoWindow}
+          onUpdateMarkers={this.updateMarkers}
+          onRemoveMarkers={this.removeMarkers}
+
+          // onToggleDrawer={this.toggleDrawer}
+          // city={this.state.city}
+          // state={this.state.state}
+          // isDrawerOpen={this.state.isDrawerOpen}
+          // onFilterPlaces={this.filterPlaces}
+          // query={this.state.query}
         />
       </div>
     );

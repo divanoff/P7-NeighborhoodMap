@@ -27,9 +27,9 @@ class MenuDrawer extends React.Component {
           value={this.props.query} 
           onChange={e => this.props.onFilterPlaces(e.target.value)} />
         <List>
-          {this.props.places.map((place, index) => (
-            <ListItem button key={index} onClick={e => this.props.onClickPlace(place)} >
-              <ListItemText primary={place.name} />
+          {this.props.markers && this.props.markers.map((marker, index) => (
+            <ListItem button key={index} onClick={e => this.props.onClickMarker(marker)} >
+              <ListItemText primary={marker.name} />
             </ListItem>
           ))}
         </List>
@@ -43,7 +43,7 @@ class MenuDrawer extends React.Component {
           <div
             tabIndex={0}
             role="button"
-            // onClick={this.toggleDrawer()}
+            // onClick={this.props.onToggleDrawer()}
             // onKeyDown={this.toggleDrawer()}
           >
             {sideList}
