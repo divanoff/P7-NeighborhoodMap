@@ -26,7 +26,9 @@ class MapView extends Component {
                     map: this.state.map,
                     name: place.name,
                     animation: this.props.google.maps.Animation.DROP,
-                    // onClick: (props, marker) => this.props.onClickMarker(marker),
+                    imgURL: place.image_url,
+                    url: place.url,
+                    rating: place.rating,
                     index
                 });
             });
@@ -84,7 +86,15 @@ class MapView extends Component {
                         visible={this.props.isInfoWindowOpen}
                         onClose={this.props.onCloseInfoWindow}
                     >
-                        <div><h3>{this.props.activeMarker.name}</h3></div>
+                        <div>
+                            <h2>{this.props.activeMarker.name}</h2>
+                            <img 
+                            src={this.props.activeMarker.imgURL} 
+                            style={{maxWidth: '250px', maxHeight: '250px'}} 
+                            alt={this.props.activeMarker.name} />
+                            <h5>Photo source: <a href={this.props.activeMarker.url} target="_blank" rel="noopener noreferrer" >Yelp</a></h5>
+                            <p>Yelp Rating: {this.props.activeMarker.rating}</p>
+                        </div>
                     </InfoWindow>
                 </Map>
             </div>
