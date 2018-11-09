@@ -22,6 +22,7 @@ class MenuDrawer extends React.Component {
       <div className={classes.list}>
         <Input 
           type="text" 
+          autoFocus
           placeholder="Filter by name" 
           className="sidebar-input" 
           value={this.props.query} 

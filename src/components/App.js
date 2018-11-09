@@ -65,10 +65,13 @@ class App extends Component {
   }
 
   clickMarker = (marker) => {
-    console.log(marker);
-    this.setState({activeMarker: marker})
+    marker.setAnimation(1);
+    this.setState({
+      activeMarker: marker,
+      isDrawerOpen: false
+    })
+
     this.openInfoWindow();
-    this.setState({isDrawerOpen: false})
   }
 
   toggleInfoWindow = () => {
@@ -80,7 +83,11 @@ class App extends Component {
   }
 
   closeInfoWindow = () => {
-    this.setState({isInfoWindowOpen: false});
+    this.state.activeMarker.setAnimation(null);
+    this.setState({
+      isInfoWindowOpen: false,
+      activeMarker: {}
+    });
   }
 
   render() {
@@ -113,13 +120,6 @@ class App extends Component {
           onCloseInfoWindow={this.closeInfoWindow}
           onUpdateMarkers={this.updateMarkers}
           onRemoveMarkers={this.removeMarkers}
-
-          // onToggleDrawer={this.toggleDrawer}
-          // city={this.state.city}
-          // state={this.state.state}
-          // isDrawerOpen={this.state.isDrawerOpen}
-          // onFilterPlaces={this.filterPlaces}
-          // query={this.state.query}
         />
       </div>
     );

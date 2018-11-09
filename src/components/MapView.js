@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import Header from './Header';
-import MenuDrawer from './MenuDrawer';
+import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
+import MapError from './MapError'
 
 const API_KEY = 'AIzaSyCv5hX2J8Ti68-0eXTxnhFzqg_092P7uKk';
  
@@ -10,16 +9,10 @@ class MapView extends Component {
         map: {}
     }
 
-    // componentDidMount() {
-    //     setTimeout(() => {
-    //         console.log(this.props.places)
-    //     }, 2000);
-    //     console.log(this.props.places)
-    // }
-
     componentDidUpdate(prevProps) {
         if (prevProps.places.length !== this.props.places.length) {
             this.props.onRemoveMarkers();
+            let bounds = new this.props.google.maps.LatLngBounds();
             let markers = this.props.places.map((place, index) => {
                 return new this.props.google.maps.Marker({
                     position: {lat: place.coordinates.latitude, lng: place.coordinates.longitude},
@@ -33,36 +26,20 @@ class MapView extends Component {
                 });
             });
             this.props.onUpdateMarkers(markers);
-            markers.forEach(marker => this.props.google.maps.event.addListener(marker, 'click', () => {
-                this.props.onClickMarker(marker);
-            }));
-            
-            // this.state.markers.forEach(marker => marker.setMap(null));
-            // this.setState({markers: this.props.places.map((place, index) => {
-            //     return new this.props.google.maps.Marker({
-            //         position: {lat: place.coordinates.latitude, lng: place.coordinates.longitude},
-            //         map: this.state.map
-            //     });
-            // })});
+            markers.forEach(marker => {
+                this.props.google.maps.event.addListener(marker, 'click', () => {
+                    // marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
+                    this.props.onClickMarker(marker);
+                });
+                bounds.extend(marker.position);
+            });
+            this.state.map && markers.length && this.state.map.fitBounds(bounds);
         }
     }
 
     render() {
         return (
             <div className="map-view">
-                {/* <Header
-                    city={this.props.city}
-                    state={this.props.state}
-                    onToggleDrawer={this.props.onToggleDrawer}
-                />
-                <MenuDrawer
-                    isDrawerOpen={this.props.isDrawerOpen}
-                    onToggleDrawer={this.props.onToggleDrawer}
-                    places={this.props.places}
-                    onFilterPlaces={this.props.onFilterPlaces}
-                    onClickPlace={this.props.clickPlace}
-                    query={this.props.query}
-                /> */}
                 <Map 
                     role='application'
                     aria-label='map'
@@ -71,16 +48,7 @@ class MapView extends Component {
                     initialCenter={{lat: this.props.lat, lng: this.props.lng}}
                     onReady={(props, map) => this.setState({map})}
                     onClick={this.props.onCloseInfoWindow}
-                    // onMarkerClick={(props, marker) => this.props.onMarkerClick(marker)}
                     >
-                    {/* {this.props.places.map(place => (
-                        <Marker 
-                            key={place.id}
-                            onClick={(props, marker, e) => this.props.onClickPlace(marker)}
-                            name={place.name}
-                            position={{lat: place.coordinates.latitude, lng: place.coordinates.longitude}} 
-                        />
-                    ))} */}
                     <InfoWindow
                         marker={this.props.activeMarker}
                         visible={this.props.isInfoWindowOpen}
@@ -103,5 +71,6 @@ class MapView extends Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: API_KEY
+    apiKey: API_KEY,
+    LoadingContainer: MapError
   })(MapView);
