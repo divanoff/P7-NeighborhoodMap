@@ -68,10 +68,10 @@ class MapView extends Component {
                     aria-label='map'
                     google={this.props.google} 
                     zoom={this.props.zoom} 
-                    center={{lat: this.props.lat, lng: this.props.lng}}
+                    initialCenter={{lat: this.props.lat, lng: this.props.lng}}
                     onReady={(props, map) => this.setState({map})}
                     onClick={this.props.onCloseInfoWindow}
-                    onMarkerClick={(props, marker) => this.props.onMarkerClick(marker)}
+                    // onMarkerClick={(props, marker) => this.props.onMarkerClick(marker)}
                     >
                     {/* {this.props.places.map(place => (
                         <Marker 
