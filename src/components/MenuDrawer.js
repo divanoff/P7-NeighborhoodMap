@@ -45,7 +45,7 @@ class MenuDrawer extends React.Component {
             tabIndex={0}
             role="button"
             // onClick={this.props.onToggleDrawer()}
-            // onKeyDown={this.toggleDrawer()}
+            // onKeyDown={this.props.onToggleDrawer}
           >
             {sideList}
           </div>

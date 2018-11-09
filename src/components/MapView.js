@@ -58,7 +58,7 @@ class MapView extends Component {
                             <h2>{this.props.activeMarker.name}</h2>
                             <img 
                             src={this.props.activeMarker.imgURL} 
-                            style={{maxWidth: '250px', maxHeight: '250px'}} 
+                            style={{maxWidth: '200px', maxHeight: '200px'}} 
                             alt={this.props.activeMarker.name} />
                             <h5>Photo source: <a href={this.props.activeMarker.url} target="_blank" rel="noopener noreferrer" >Yelp</a></h5>
                             <p>Yelp Rating: {this.props.activeMarker.rating}</p>

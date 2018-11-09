@@ -66,6 +66,7 @@ class App extends Component {
 
   clickMarker = (marker) => {
     marker.setAnimation(1);
+    this.state.activeMarker.animation && this.state.activeMarker.setAnimation(null);
     this.setState({
       activeMarker: marker,
       isDrawerOpen: false
@@ -83,7 +84,7 @@ class App extends Component {
   }
 
   closeInfoWindow = () => {
-    this.state.activeMarker.setAnimation(null);
+    this.state.activeMarker.animation && this.state.activeMarker.setAnimation(null);
     this.setState({
       isInfoWindowOpen: false,
       activeMarker: {}
