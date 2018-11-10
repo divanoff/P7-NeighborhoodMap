@@ -1,4 +1,4 @@
-A live working version of this app is hosted on Netlify and can be found [here](https://p7-neighborhood-app.netlify.com/). The app is designed to determine your location based on your IP address. If Yelp returns insifficient or no results for that location, a default location and data set is used so the reviewer can test the app successfully. When you open the app you should see either your approximate location and craft beer locations near you, or the default location of Cape Cod, MA and a number of craft beer places in the area.
+A live working version of this app is hosted on Netlify and can be found [here](https://p7-neighborhood-app.netlify.com/). The app is designed to determine your location based on your IP address. If Yelp returns insufficient or no results for that location, a default location and data set is used so the reviewer can test the app successfully. When you open the app you should see either your approximate location and craft beer locations near you, or the default location of Cape Cod, MA and a number of craft beer places in the area.
 
 API's used:
 - Google Maps API
