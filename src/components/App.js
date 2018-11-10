@@ -5,12 +5,13 @@ import MapView from './MapView';
 import { getIPLocation } from '../utils/ipinfoAPI';
 import { getPlaces } from '../utils/yelpApi';
 import './App.css';
+import hardCopy from '../data/places.json';
 
 class App extends Component {
 
   state = {
-    lat: 41.6781432,
-    lng: -70.310088,
+    lat: 0, //41.6781432,
+    lng: 0, //-70.310088,
     zoom: 11,
     city: '',
     state: '',
@@ -26,20 +27,38 @@ class App extends Component {
   }
 
   componentDidMount() {
-    getIPLocation().then(data => {
-      let lat = parseFloat(data.loc.split(',')[0]);
-      let lng = parseFloat(data.loc.split(',')[1]);
-      this.setState({
-        lat,
-        lng,
-        city: data.city,
-        state: data.region,
-        country: data.country,
-        postal: data.postal,
-        ipAddress: data.ip
-      });
+    getIPLocation().then(ipData => {
+      let lat = parseFloat(ipData.loc.split(',')[0]);
+      let lng = parseFloat(ipData.loc.split(',')[1]);
       getPlaces(lat, lng)
-        .then(data => {this.setState({places: data.businesses, filteredPlaces: data.businesses})})
+        .then(data => {
+          //If Yelp search returns sufficient results load them
+          if (data.businesses.length >= 5) {
+            this.setState({
+              places: data.businesses,
+              filteredPlaces: data.businesses,
+              lat,
+              lng,
+              city: ipData.city,
+              state: ipData.region,
+              country: ipData.country,
+              postal: ipData.postal,
+              ipAddress: ipData.ip
+            });
+          } else { //if Yelp search returns unsufficient or no results, load defaults
+            this.setState({
+              places: hardCopy.businesses,
+              filteredPlaces: hardCopy.businesses,
+              lat: 41.6781432,
+              lng: -70.310088,
+              city: 'Cape Cod',
+              state: 'MA',
+              country: 'USA',
+              postal: '02601',
+              ipAddress: '0.0.0.0'
+            })
+          }
+        })
         .catch(e => console.log(e));
     }).catch(e => console.log(e));
   }
