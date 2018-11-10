@@ -1,4 +1,4 @@
-A live working version of this app is hosted on Netlify and can be found [here](https://p7-neighborhood-app.netlify.com/). This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A live working version of this app is hosted on Netlify and can be found [here](https://p7-neighborhood-app.netlify.com/). The app is designed to determine your location based on your IP address. If Yelp returns insifficient or no results for that location, a default location and data set is used so the reviewer can test the app successfully. When you open the app you should see either your approximate location and craft beer locations near you, or the default location of Cape Cod, MA and a number of craft beer places in the area.
 
 API's used:
 - Google Maps API
@@ -14,7 +14,7 @@ The app also uses material-ui MenuDrawer for the slideout sidebar.
 
 Special thanks to coach Doug Brown for the excellent walk-through and the tip on using google-maps-react as a wrapper around the Google Maps API.
 
-Below you will find some information on how to perform common tasks.<br>
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ## Table of Contents
