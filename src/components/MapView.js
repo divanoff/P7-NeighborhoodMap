@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
 import MapError from './MapError'
 
-const API_KEY = process.env.NODE_ENV;
+const API_KEY = process.env.GMAPS_API;
  
 class MapView extends Component {
     state = {
