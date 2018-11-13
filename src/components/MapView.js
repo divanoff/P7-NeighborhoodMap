@@ -10,6 +10,7 @@ class MapView extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        console.log(process.env.GMAPS_API);
         if (prevProps.places.length !== this.props.places.length) {
             this.props.onRemoveMarkers();
             let bounds = new this.props.google.maps.LatLngBounds();
